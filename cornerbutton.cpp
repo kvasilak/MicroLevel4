@@ -1,7 +1,7 @@
 /* MicroLevel Four Ride Height controller (c) 2025 Keith Vasilakes / Corvette Engineering */
 
 /* looks at button states ( interrupts ) and determines new button states
-Then tell the solenoid class what state to transition to.
+Then tell the LED and solenoid classes what state to transition to.
 */
 
 
