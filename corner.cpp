@@ -24,7 +24,7 @@ Then tell the LED and solenoid classes what state to transition to.
 #include <inttypes.h>
 #include <Arduino.h>
 
-#include "cornerbutton.h"
+#include "corner.h"
 #include "cornersolenoid.h"
 #include "cornerleds.h"
 

@@ -1,11 +1,11 @@
 /* MicroLevel Four Ride Height controller (c) 2025 Keith Vasilakes / Corvette Engineering */
 
-#ifndef __CORNERBUTTON_H_INCLUDED__
-#define __CORNERBUTTON_H_INCLUDED__
+#ifndef __CORNER_H_INCLUDED__
+#define __CORNER_H_INCLUDED__
 
 #include "cornerleds.h"
 #include "cornersolenoid.h"
-#include "microlevelio.h"
+//#include "microlevelio.h"
 
 class CCorner
 {

@@ -6,7 +6,7 @@
 */
 
 #include "microlevelio.h"
-#include "cornerbutton.h"
+#include "corner.h"
 
 #ifndef __LEVEL_INCLUDED_H__
 #define __LEVEL_INCLUDED_H__

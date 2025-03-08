@@ -6,7 +6,7 @@ and requires the Mighty core 3.0.3m https://github.com/MCUdude/MightyCore
 */
 
 #include "common.h"
-#include "cornerbutton.h"
+#include "corner.h"
 #include "cornerleds.h"
 #include "cornersolenoid.h"
 #include "level.h"
