@@ -21,6 +21,30 @@ void CCornerLeds::SetState(CornerStates_e state)
   Events.Put(state);
 }
 
+void CCornerLeds::FillLED(bool on)
+{
+  if(on)
+  {
+    //WriteReg();
+  }
+  else
+  {
+
+  }
+}
+
+void CCornerLeds::DumpLED(bool on)
+{
+  if(on)
+  {
+
+  }
+  else
+  {
+    
+  }
+}
+
 void CCornerLeds::Run()
 {
   //read state from circular button
@@ -31,7 +55,29 @@ void CCornerLeds::Run()
 
   if(ok)
   {
+    switch(state)
+    {
+      case CornerStateHold:
+      {
+        FillLED(false);
+        DumpLED(false);
+      }
+      break;
 
+      case CornerStateFill:
+      {
+        FillLED(true);
+        DumpLED(false);
+      }
+      break;
+
+      case CornerStateDump:
+      {
+        FillLED(false);
+        DumpLED(true);
+      }
+      break;
+    }
   }
 
 }

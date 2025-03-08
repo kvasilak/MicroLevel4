@@ -28,6 +28,13 @@ Then tell the LED and solenoid classes what state to transition to.
 #include "cornersolenoid.h"
 #include "cornerleds.h"
 
+CCornerButton *CB;
+
+static void UP_Released(void)
+{CB->BtnHndlr(BTN_LF_UP);}
+
+static void DOWN_Released(void)
+{CB->BtnHndlr(BTN_LF_DOWN);}
 
 CCornerButton::CCornerButton()
 {
@@ -36,8 +43,13 @@ CCornerButton::CCornerButton()
 
 void CCornerButton::Setup(int up, int dwn, CCornerLeds *led, CCornerSolenoid *sol)
 {
+  CB = this; //set pointer to ourself
+
   UpButton = up;
   DownButton = dwn;
+
+  attachInterrupt(digitalPinToInterrupt(up),   UP_Released, FALLING );
+  attachInterrupt(digitalPinToInterrupt(dwn), DOWN_Released, FALLING );
 
   Led = led;
   Sol = sol;
@@ -57,17 +69,17 @@ void CCornerButton::SetState(CornerStates_e state)
 }
 
 //this function is called from the ISR when either of the two buttons is released.
-void CCornerButton::BtnHndlr( )
+void CCornerButton::BtnHndlr( int button)
 {
   switch(CornerState)
   {
     case CornerStateHold:
     {
-      if(Button == UpButton) //only two buttons Up and down
+      if(button == UpButton) //only two buttons Up and down
       {
         SetState(CornerStateFill);
       }
-      else if(Button == DownButton)
+      else if(button == DownButton)
       {
         SetState(CornerStateDump);
       }
@@ -77,11 +89,11 @@ void CCornerButton::BtnHndlr( )
 
     case CornerStateFill:
     {
-      if(Button == UpButton) //only two buttons Up and down
+      if(button == UpButton) //only two buttons Up and down
       {
         SetState(CornerStateHold);
       }
-      else if(Button == DownButton)
+      else if(button == DownButton)
       {
         SetState(CornerStateDump);
       }
@@ -90,11 +102,11 @@ void CCornerButton::BtnHndlr( )
 
     case CornerStateDump:
     {
-      if(Button == UpButton) //only two buttons Up and down
+      if(button == UpButton) //only two buttons Up and down
       {
         SetState(CornerStateFill);
       }
-      else if(Button == DownButton)
+      else if(button == DownButton)
       {
         SetState(CornerStateHold);
       }

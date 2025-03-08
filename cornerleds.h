@@ -6,8 +6,9 @@
 
 #include "circularbuffer.h"
 #include "microlevelio.h"
+#include "leddriver.h"
 
-class CCornerLeds
+class CCornerLeds : private CLedDriver
 {
   public:
     CCornerLeds();
@@ -17,6 +18,10 @@ class CCornerLeds
     void Run();
 
     void SetState(CornerStates_e state);
+
+    void FillLED(bool on);
+
+    void DumpLED(bool on);
 
   private:
 

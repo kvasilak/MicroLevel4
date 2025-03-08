@@ -26,9 +26,32 @@ CCornerButton ButtonRF;
 CCornerButton ButtonLR;
 CCornerButton ButtonRR;
 
+// void BTN_LF_UP_Released(void)
+// {ButtonLF.BtnHndlr(BTN_LF_UP);}
+
+// void BTN_LF_DOWN_Released(void)
+// {ButtonLF.BtnHndlr(BTN_LF_DOWN);}
+
+// void BTN_RF_UP_Released(void)
+// {ButtonRF.BtnHndlr(BTN_RF_UP);}
+
+// void BTN_RF_DOWN_Released(void)
+// {ButtonRF.BtnHndlr(BTN_RF_DOWN);}
+
+// void BTN_LR_UP_Released(void)
+// {ButtonLR.BtnHndlr(BTN_LR_UP);}
+
+// void BTN_LR_DOWN_Released(void)
+// {ButtonLR.BtnHndlr(BTN_LR_DOWN);}
+
+// void BTN_RR_UP_Released(void)
+// {ButtonRR.BtnHndlr(BTN_RR_UP);}
+
+// void BTN_RR_DOWN_Released(void)
+// {ButtonRR.BtnHndlr(BTN_RR_DOWN);}
+
 void setup() 
 {
-    
   Cmn.SetupIO();
 
   Serial.begin(115200);
@@ -52,6 +75,16 @@ void setup()
   ButtonRF.Setup(BTN_RF_UP, BTN_RF_DOWN, &LedRF, &SolRF);
   ButtonLR.Setup(BTN_LR_UP, BTN_LR_DOWN, &LedLR, &SolLR);
   ButtonRR.Setup(BTN_RR_UP, BTN_RR_DOWN, &LedRR, &SolRR);
+
+//attach button interrupts
+  // attachInterrupt(digitalPinToInterrupt(BTN_LF_UP),   BTN_LF_UP_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_LF_DOWN), BTN_LF_DOWN_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_RF_UP),   BTN_RF_UP_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_RF_DOWN), BTN_RF_DOWN_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_LR_UP),   BTN_LR_UP_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_LR_DOWN), BTN_LR_DOWN_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_RR_UP),   BTN_RR_UP_Released, FALLING );
+  // attachInterrupt(digitalPinToInterrupt(BTN_RR_DOWN), BTN_RR_DOWN_Released, FALLING );
 }
 
 void loop() 

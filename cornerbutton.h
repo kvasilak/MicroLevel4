@@ -13,13 +13,12 @@ class CCornerButton
     CCornerButton();
 
     void Setup();
-
     void Setup(int up, int dwn, CCornerLeds *Leds, CCornerSolenoid *sol);
-
+    void BtnHndlr(int button);
 
   private:
     void SetState(CornerStates_e state);
-    void BtnHndlr( );
+
 
     CornerStates_e CornerState;;
 
@@ -28,8 +27,6 @@ class CCornerButton
 
     int UpButton;
     int DownButton;
-    int Button;
-
 };
 
 #endif
