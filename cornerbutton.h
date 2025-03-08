@@ -7,18 +7,16 @@
 #include "cornersolenoid.h"
 #include "microlevelio.h"
 
-class CCornerButton
+class CCorner
 {
   public:
-    CCornerButton();
+    CCorner();
 
-    void Setup();
     void Setup(int up, int dwn, CCornerLeds *Leds, CCornerSolenoid *sol);
     void BtnHndlr(int button);
 
   private:
     void SetState(CornerStates_e state);
-
 
     CornerStates_e CornerState;;
 

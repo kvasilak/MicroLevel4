@@ -28,7 +28,7 @@ Then tell the LED and solenoid classes what state to transition to.
 #include "cornersolenoid.h"
 #include "cornerleds.h"
 
-CCornerButton *CB;
+static CCorner *CB;
 
 static void UP_Released(void)
 {CB->BtnHndlr(BTN_LF_UP);}
@@ -36,12 +36,10 @@ static void UP_Released(void)
 static void DOWN_Released(void)
 {CB->BtnHndlr(BTN_LF_DOWN);}
 
-CCornerButton::CCornerButton()
-{
+CCorner::CCorner()
+{}
 
-}
-
-void CCornerButton::Setup(int up, int dwn, CCornerLeds *led, CCornerSolenoid *sol)
+void CCorner::Setup(int up, int dwn, CCornerLeds *led, CCornerSolenoid *sol)
 {
   CB = this; //set pointer to ourself
 
@@ -56,7 +54,7 @@ void CCornerButton::Setup(int up, int dwn, CCornerLeds *led, CCornerSolenoid *so
 }
 
 
-void CCornerButton::SetState(CornerStates_e state)
+void CCorner::SetState(CornerStates_e state)
 {
   CornerState = state;
 
@@ -69,7 +67,7 @@ void CCornerButton::SetState(CornerStates_e state)
 }
 
 //this function is called from the ISR when either of the two buttons is released.
-void CCornerButton::BtnHndlr( int button)
+void CCorner::BtnHndlr( int button)
 {
   switch(CornerState)
   {
@@ -83,7 +81,6 @@ void CCornerButton::BtnHndlr( int button)
       {
         SetState(CornerStateDump);
       }
-
     }
     break;
 

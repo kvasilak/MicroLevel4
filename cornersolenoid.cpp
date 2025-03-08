@@ -9,16 +9,12 @@ CCornerSolenoid::CCornerSolenoid()
 {}
 
 void CCornerSolenoid::Setup(int fill, int dump)
-{}
-
-void CCornerSolenoid::FillSolenoid(bool on)
 {
-(void)on;
-}
+  Fill = fill;
+  Dump = dump;
 
-void CCornerSolenoid::DumpSolenoid(bool on)
-{
-(void)on;
+  pinMode(Fill, OUTPUT);
+  pinMode(Dump, OUTPUT);
 }
 
 void CCornerSolenoid::SetState(CornerStates_e state)
@@ -27,23 +23,23 @@ void CCornerSolenoid::SetState(CornerStates_e state)
   {
     case CornerStateHold:
     {
-      FillSolenoid(false);
-      DumpSolenoid(false);
+      digitalWrite(Fill, LOW);
+      digitalWrite(Dump, LOW);
     }
     break;
 
     case CornerStateFill:
     {
-      FillSolenoid(true);
-      DumpSolenoid(false);
+      digitalWrite(Fill, HIGH);
+      digitalWrite(Dump, LOW);
     }
     break;
 
     case CornerStateDump:
     {
-      FillSolenoid(false);
-      DumpSolenoid(true);
-    }
+      digitalWrite(Fill, LOW);
+      digitalWrite(Dump, HIGH);
+     }
     break;
   }
   

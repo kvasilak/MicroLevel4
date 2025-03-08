@@ -12,17 +12,11 @@ class CCornerSolenoid
     CCornerSolenoid();
 
     void Setup(int fill, int dump);
-    //void Run(void);
     void SetState(CornerStates_e state);
-    
-    
 
   private:
-  void FillSolenoid(bool on);
-    void DumpSolenoid(bool on);
-  
-  
-
+    int Fill;
+    int Dump;
 };
 
 #endif

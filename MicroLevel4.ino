@@ -9,6 +9,7 @@ and requires the Mighty core 3.0.3m https://github.com/MCUdude/MightyCore
 #include "cornerbutton.h"
 #include "cornerleds.h"
 #include "cornersolenoid.h"
+#include "level.h"
 
 CCommon Cmn;
 CCornerLeds LedLF;
@@ -21,34 +22,12 @@ CCornerSolenoid SolRF;
 CCornerSolenoid SolLR;
 CCornerSolenoid SolRR;
 
-CCornerButton ButtonLF;
-CCornerButton ButtonRF;
-CCornerButton ButtonLR;
-CCornerButton ButtonRR;
+CCorner CornerLF;
+CCorner CornerRF;
+CCorner CornerLR;
+CCorner CornerRR;
 
-// void BTN_LF_UP_Released(void)
-// {ButtonLF.BtnHndlr(BTN_LF_UP);}
-
-// void BTN_LF_DOWN_Released(void)
-// {ButtonLF.BtnHndlr(BTN_LF_DOWN);}
-
-// void BTN_RF_UP_Released(void)
-// {ButtonRF.BtnHndlr(BTN_RF_UP);}
-
-// void BTN_RF_DOWN_Released(void)
-// {ButtonRF.BtnHndlr(BTN_RF_DOWN);}
-
-// void BTN_LR_UP_Released(void)
-// {ButtonLR.BtnHndlr(BTN_LR_UP);}
-
-// void BTN_LR_DOWN_Released(void)
-// {ButtonLR.BtnHndlr(BTN_LR_DOWN);}
-
-// void BTN_RR_UP_Released(void)
-// {ButtonRR.BtnHndlr(BTN_RR_UP);}
-
-// void BTN_RR_DOWN_Released(void)
-// {ButtonRR.BtnHndlr(BTN_RR_DOWN);}
+CLevel Leveler;
 
 void setup() 
 {
@@ -71,24 +50,17 @@ void setup()
   SolLR.Setup(SOL_LR_UP, SOL_LR_DOWN);
   SolRR.Setup(SOL_RR_UP, SOL_RR_DOWN);
 
-  ButtonLF.Setup(BTN_LF_UP, BTN_LF_DOWN, &LedLF, &SolLF);
-  ButtonRF.Setup(BTN_RF_UP, BTN_RF_DOWN, &LedRF, &SolRF);
-  ButtonLR.Setup(BTN_LR_UP, BTN_LR_DOWN, &LedLR, &SolLR);
-  ButtonRR.Setup(BTN_RR_UP, BTN_RR_DOWN, &LedRR, &SolRR);
+  CornerLF.Setup(BTN_LF_UP, BTN_LF_DOWN, &LedLF, &SolLF);
+  CornerRF.Setup(BTN_RF_UP, BTN_RF_DOWN, &LedRF, &SolRF);
+  CornerLR.Setup(BTN_LR_UP, BTN_LR_DOWN, &LedLR, &SolLR);
+  CornerRR.Setup(BTN_RR_UP, BTN_RR_DOWN, &LedRR, &SolRR);
 
-//attach button interrupts
-  // attachInterrupt(digitalPinToInterrupt(BTN_LF_UP),   BTN_LF_UP_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_LF_DOWN), BTN_LF_DOWN_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_RF_UP),   BTN_RF_UP_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_RF_DOWN), BTN_RF_DOWN_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_LR_UP),   BTN_LR_UP_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_LR_DOWN), BTN_LR_DOWN_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_RR_UP),   BTN_RR_UP_Released, FALLING );
-  // attachInterrupt(digitalPinToInterrupt(BTN_RR_DOWN), BTN_RR_DOWN_Released, FALLING );
+  Leveler.Setup(BUTTON_ONE, &CornerLF, &CornerRF, &CornerLR, &CornerRR);
 }
 
 void loop() 
 {
+
   //buttons are interrupt driven
 
   LedLF.Run();
