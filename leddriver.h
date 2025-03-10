@@ -17,27 +17,22 @@ class CLedDriver
 {
 
 public:
-	static CLedDriver &is()
-	{
-		static CLedDriver me;
-			
-		return me;
-	}
-	
-	void On(uint8_t led, bool on);
-	void Brightness(uint8_t led, uint8_t brightness);
-	void Dim(uint8_t brightness);
-	void Blink(uint8_t rate);
-	void Init();
 
-protected:
-	CLedDriver();
-	CLedDriver& operator=( const CLedDriver &c );
-	
-	void WriteReg(uint8_t LEDReg, uint8_t data);
-	
-	uint8_t LEDReg0;
-	uint8_t LEDReg1;
+  void Setup(void);
+	//void On(uint8_t led, bool on);
+	//void Brightness(uint8_t led, uint8_t brightness);
+	//void Dim(uint8_t brightness);
+	//void Blink(uint8_t rate);
+  void Run(void);
+
+private:
+
+void Init(void);
+
+void Demo(void);
+
+void WriteByte(uint8_t Dev_Add,uint8_t Reg_Add,uint8_t Reg_Dat);
+
 }; //CLedDriver
 
 #endif //__CLEDDRIVER_H__

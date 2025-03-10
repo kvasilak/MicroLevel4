@@ -29,12 +29,14 @@ Then tell the LED and solenoid classes what state to transition to.
 #include "cornerleds.h"
 
 static CCorner *CB;
+static int UpButton;
+static int DownButton;
 
 static void UP_Released(void)
-{CB->BtnHndlr(BTN_LF_UP);}
+{CB->BtnHndlr(UpButton);}
 
 static void DOWN_Released(void)
-{CB->BtnHndlr(BTN_LF_DOWN);}
+{CB->BtnHndlr(DownButton);}
 
 CCorner::CCorner()
 {}

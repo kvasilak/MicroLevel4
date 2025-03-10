@@ -1,5 +1,7 @@
 /* MicroLevel Four Ride Height controller (c) 2025 Keith Vasilakes / Corvette Engineering */
 
+//https://github.com/kriswiner/IS31FL3246/blob/main/LedRing_IS31FL3246A_Dragonfly/LedRing_IS31FL3246A_Dragonfly.ino
+
 #include <inttypes.h>
 #include <Arduino.h>
 

@@ -16,11 +16,23 @@ class CLevel
   public:
     CLevel();
 
+    enum LevelStates_e{
+      LevelStateAuto,
+      LevelStateManual
+    };
+
     void Setup(int btn, CCorner *lf, CCorner *fr, CCorner *lr, CCorner *rr);
     //void SetState(CornerStates_e state);
 
+    void BtnHndlr( int button);
+
   private:
+
+    void SetState(LevelStates_e state);
+    
     int Button;
+    LevelStates_e LevelState;
+
     CCorner *LF;
     CCorner *FR;
     CCorner *LR;

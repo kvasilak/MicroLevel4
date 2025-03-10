@@ -22,9 +22,6 @@ class CCorner
 
     CCornerLeds *Led;
     CCornerSolenoid *Sol;
-
-    int UpButton;
-    int DownButton;
 };
 
 #endif
