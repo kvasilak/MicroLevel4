@@ -7,13 +7,13 @@
 #include "microlevelio.h"
 
 //setup the IO for the sequencer
-void CCommon::SetupIO()
-{
-  //DDRA = 0xFF;
-  DDRB = 0xFF;
-  DDRC = B11000011;
-  DDRD = 0xF0; //B11110000;
-}
+// void CCommon::SetupIO()
+// {
+//   //DDRA = 0xFF;
+//   DDRB = 0xFF;
+//   DDRC = B11000011;
+//   DDRD = 0xF0; //B11110000;
+// }
 
 // MainModes_e CCommon::GetMode(void)
 // {

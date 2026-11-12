@@ -1,14 +1,10 @@
-/* MicroLevel Four Ride Height controller (c) 2025 Keith Vasilakes / Corvette Engineering */
+/* MicroLevel Four Ride Height controller (c) 2026 Keith Vasilakes / Corvette Engineering */
 
-/* looks at button states ( interrupts ) and determines new button states
-Then tell the LED and solenoid classes what state to transition to.
-*/
-
+// wait for an event and updates the LED and solenoids 
 
 //  inputs:
-//  an up button
-//  a down button
-// Corner Solenoid class ( pointer?? )
+//  Up event ( may be button, remote, from the autolevel system, or ???)
+//  Down event
 
 // Button states
 // Hold, filling, dumping
@@ -19,7 +15,6 @@ Then tell the LED and solenoid classes what state to transition to.
 // In Filling -> down button pressed -> Dump
 // In dumping -> up button press -> Fill
 // In Dumping -> down button press -> Hold
-// In dumping -> Up button press -> Fill
 
 #include <inttypes.h>
 #include <Arduino.h>
@@ -28,29 +23,11 @@ Then tell the LED and solenoid classes what state to transition to.
 #include "cornersolenoid.h"
 #include "cornerleds.h"
 
-static CCorner *CB;
-static int UpButton;
-static int DownButton;
-
-static void UP_Released(void)
-{CB->BtnHndlr(UpButton);}
-
-static void DOWN_Released(void)
-{CB->BtnHndlr(DownButton);}
-
 CCorner::CCorner()
 {}
 
-void CCorner::Setup(int up, int dwn, CCornerLeds *led, CCornerSolenoid *sol)
+void CCorner::Setup( CCornerLeds *led, CCornerSolenoid *sol)
 {
-  CB = this; //set pointer to ourself
-
-  UpButton = up;
-  DownButton = dwn;
-
-  attachInterrupt(digitalPinToInterrupt(up),   UP_Released, FALLING );
-  attachInterrupt(digitalPinToInterrupt(dwn), DOWN_Released, FALLING );
-
   Led = led;
   Sol = sol;
 }
@@ -58,29 +35,38 @@ void CCorner::Setup(int up, int dwn, CCornerLeds *led, CCornerSolenoid *sol)
 
 void CCorner::SetState(CornerStates_e state)
 {
-  CornerState = state;
+  if( CornerState != state)
+  {
+    CornerState = state;
 
-  //update LEDs
-  Led->SetState(state);
+    //update LEDs
+    Led->SetState(state);
 
-  //update solenoids
-  Sol->SetState(state);
-
+    //update solenoids
+    Sol->SetState(state);
+  }
 }
 
 //this function is called from the ISR when either of the two buttons is released.
-void CCorner::BtnHndlr( int button)
+void CCorner::Event( int evt)
 {
+  Serial.print("Event:");
+  Serial.print(evt);
+  Serial.print("," );
+
   switch(CornerState)
   {
     case CornerStateHold:
     {
-      if(button == UpButton) //only two buttons Up and down
+      Serial.println("hold->");
+      if(evt == UpEvent) //only two buttons Up and down
       {
+        Serial.println("fill");
         SetState(CornerStateFill);
       }
-      else if(button == DownButton)
+      else if(evt == DownEvent)
       {
+        Serial.println("dump");
         SetState(CornerStateDump);
       }
     }
@@ -88,12 +74,15 @@ void CCorner::BtnHndlr( int button)
 
     case CornerStateFill:
     {
-      if(button == UpButton) //only two buttons Up and down
+      Serial.print("Fill->");
+      if(evt == UpEvent) //only two buttons Up and down
       {
+        Serial.println("hold");
         SetState(CornerStateHold);
       }
-      else if(button == DownButton)
+      else if(evt == DownEvent)
       {
+        Serial.println("dump");
         SetState(CornerStateDump);
       }
     }
@@ -101,21 +90,28 @@ void CCorner::BtnHndlr( int button)
 
     case CornerStateDump:
     {
-      if(button == UpButton) //only two buttons Up and down
+      Serial.print("Dump->");
+      if(evt == UpEvent) //only two buttons Up and down
       {
+        Serial.println("fill");
         SetState(CornerStateFill);
       }
-      else if(button == DownButton)
+      else if(evt == DownEvent)
       {
+        Serial.println("hold");
         SetState(CornerStateHold);
+      }
+      else
+      {
+        Serial.println("NA");
       }
     }
     break;
 
-    //handle travel buttons
+    //handle travel buttons?
     default:
     {
-
+      Serial.println("Default");
     }
   }
 }

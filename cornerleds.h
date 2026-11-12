@@ -19,13 +19,12 @@ class CCornerLeds : private CLedDriver
 
     void SetState(CornerStates_e state);
 
-    void FillLED(bool on);
-
-    void DumpLED(bool on);
-
   private:
-
+    //event queue
     CircularBuffer <CornerStates_e, 5> Events;
+
+    void FillLED(bool on);
+    void DumpLED(bool on);
 
     int Up;
     int Dwn;

@@ -21,22 +21,48 @@ class CLevel
       LevelStateManual
     };
 
-    void Setup(int btn, CCorner *lf, CCorner *fr, CCorner *lr, CCorner *rr);
+    enum LevelEvents_e{
+      EvtButtonPressed,
+      EvtButtonReleased,
+      //LevelEventTimer
+    };
+
+    enum Buttons_e{
+      BtnLF,
+      BtnRF,
+      BtnLR,
+      BtnRR,
+      BtnAuto
+    };
+
+    enum BtnPressType_e{
+      BtnPressBounce,
+      BtnPressShort,
+      BtnPressLong
+    };
+
+    void Setup( CCorner *lf, CCorner *fr, CCorner *lr, CCorner *rr);
     //void SetState(CornerStates_e state);
 
-    void BtnHndlr( int button);
+    void Event( CLevel::Buttons_e btn, CLevel::LevelEvents_e evt);
 
   private:
 
     void SetState(LevelStates_e state);
     
-    int Button;
     LevelStates_e LevelState;
 
     CCorner *LF;
-    CCorner *FR;
+    CCorner *RF;
     CCorner *LR;
     CCorner *RR;
+
+    void BtnHndlerLF(CLevel::LevelEvents_e evt);
+    void BtnHndlerRF(CLevel::LevelEvents_e evt);
+    void BtnHndlerLR(CLevel::LevelEvents_e evt);
+    void BtnHndlerRR(CLevel::LevelEvents_e evt);
+
+    CLevel::BtnPressType_e PressType(uint32_t start, uint32_t end);
     
 };
 #endif

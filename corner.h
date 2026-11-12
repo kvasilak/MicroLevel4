@@ -12,8 +12,8 @@ class CCorner
   public:
     CCorner();
 
-    void Setup(int up, int dwn, CCornerLeds *Leds, CCornerSolenoid *sol);
-    void BtnHndlr(int button);
+    void Setup(CCornerLeds *Leds, CCornerSolenoid *sol);
+    void Event(int evt);
 
   private:
     void SetState(CornerStates_e state);

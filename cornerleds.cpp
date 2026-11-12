@@ -15,6 +15,17 @@ void CCornerLeds::Setup(int up, int dwn)
   //which leds to use
   Up = up;
   Dwn = dwn;
+
+  pinMode(Up, OUTPUT); 
+  pinMode(Dwn, OUTPUT); 
+
+  digitalWrite(Up, HIGH); // Turn LED off
+  digitalWrite(Dwn, HIGH); 
+  
+  // Serial.print("up: ");
+  // Serial.print(up);
+  // Serial.print(", dwn: ");
+  // Serial.println(dwn);
 }
 
 void CCornerLeds::SetState(CornerStates_e state)
@@ -23,28 +34,18 @@ void CCornerLeds::SetState(CornerStates_e state)
   Events.Put(state);
 }
 
+//todo spi connection to LED controller
 void CCornerLeds::FillLED(bool on)
 {
-  if(on)
-  {
-    //WriteReg();
-  }
-  else
-  {
+  // Serial.print("fill: ");
+  // Serial.println(on);
 
-  }
+  digitalWrite(Up, on);
 }
 
 void CCornerLeds::DumpLED(bool on)
 {
-  if(on)
-  {
-
-  }
-  else
-  {
-    
-  }
+   digitalWrite(Dwn, on);
 }
 
 void CCornerLeds::Run()
@@ -55,7 +56,7 @@ void CCornerLeds::Run()
 
   ok = Events.Get(state);
 
-  if(ok)
+  if(ok) // is there an event in the queue?
   {
     switch(state)
     {

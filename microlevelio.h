@@ -16,6 +16,12 @@ enum CornerStates_e{
   CornerStateDump
 };
 
+enum ButtonEvents_e{
+  UpEvent,
+  DownEvent,
+  HoldEvent
+};
+
 /*
 input and output defines
 */
@@ -83,8 +89,8 @@ input and output defines
 #define BTN_RR_UP       6
 #define BTN_RR_DOWN     7
 
-#define SOL_LF_UP       8
-#define SOL_LF_DOWN     9
+#define SOL_LF_UP       6
+#define SOL_LF_DOWN     7
 #define SOL_RF_UP       10
 #define SOL_RF_DOWN     11
 #define SOL_LR_UP       12
@@ -92,8 +98,8 @@ input and output defines
 #define SOL_RR_UP       14
 #define SOL_RR_DOWN     15
 
-#define lED_LF_UP       8
-#define lED_LF_DOWN     9
+#define lED_LF_UP       4
+#define lED_LF_DOWN     5
 #define lED_RF_UP       10
 #define lED_RF_DOWN     11
 #define lED_LR_UP       12
